@@ -125,19 +125,19 @@ class CountDown extends React.Component {
   renderDigit = (d) => {
     const {digitStyle, digitTxtStyle, size} = this.props;
     return (
-      <View style={[
-        styles.digitCont,        
-        {width: size * 2.3, height: size * 2.6},
-        digitStyle,
-      ]}>
-        <Text style={[
-          styles.digitTxt,
-          {fontSize: size},
-          digitTxtStyle,
+        <View style={[
+          styles.digitCont,
+          {width: size * 2.3, height: size * 2.6},
+          digitStyle,
         ]}>
-          {d}
-        </Text>
-      </View>
+          <Text style={[
+            styles.digitTxt,
+            {fontSize: size},
+            digitTxtStyle,
+          ]}>
+            {d}
+          </Text>
+        </View>
     );
   };
 
@@ -145,40 +145,40 @@ class CountDown extends React.Component {
     const {timeLabelStyle, size} = this.props;
     if (label) {
       return (
-        <Text style={[
-          styles.timeTxt,
-          {fontSize: size / 1.8},
-          timeLabelStyle,
-        ]}>
-          {label}
-        </Text>
+          <Text style={[
+            styles.timeTxt,
+            {fontSize: size / 1.8},
+            timeLabelStyle,
+          ]}>
+            {label}
+          </Text>
       );
     }
   };
 
   renderDoubleDigits = (label, digits) => {
     return (
-      <View style={styles.doubleDigitCont}>
-        <View style={styles.timeInnerCont}>
-          {this.renderDigit(digits)}
+        <View style={styles.doubleDigitCont}>
+          <View style={styles.timeInnerCont}>
+            {this.renderDigit(digits)}
+          </View>
+          {this.renderLabel(label)}
         </View>
-        {this.renderLabel(label)}
-      </View>
     );
   };
 
   renderSeparator = () => {
     const {separatorStyle, size} = this.props;
     return (
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={[
-          styles.separatorTxt,
-          {fontSize: size * 1.2},
-          separatorStyle,
-        ]}>
-          {':'}
-        </Text>
-      </View>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={[
+            styles.separatorTxt,
+            {fontSize: size * 1.2},
+            separatorStyle,
+          ]}>
+            {':'}
+          </Text>
+        </View>
     );
   };
 
@@ -188,28 +188,36 @@ class CountDown extends React.Component {
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
     const Component = this.props.onPress ? TouchableOpacity : View;
-
-    return (
-      <Component
-        style={styles.timeCont}
-        onPress={this.props.onPress}
-      >
-        {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
+    const {timeLabelStyle} = this.props;
+    const {digitStyle, digitTxtStyle, size} = this.props;
+    /* This should be inside <Component>
+      {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
         {showSeparator && timeToShow.includes('D') && timeToShow.includes('H') ? this.renderSeparator() : null}
         {timeToShow.includes('H') ? this.renderDoubleDigits(timeLabels.h, newTime[1]) : null}
         {showSeparator && timeToShow.includes('H') && timeToShow.includes('M') ? this.renderSeparator() : null}
         {timeToShow.includes('M') ? this.renderDoubleDigits(timeLabels.m, newTime[2]) : null}
         {showSeparator && timeToShow.includes('M') && timeToShow.includes('S') ? this.renderSeparator() : null}
         {timeToShow.includes('S') ? this.renderDoubleDigits(timeLabels.s, newTime[3]) : null}
-      </Component>
+     */
+    return (
+        <Component
+            style={styles.timeCont}
+            onPress={this.props.onPress}
+        >
+          <Text style={[
+            styles.digitTxt,
+            {fontSize: size},
+            digitTxtStyle,
+          ]}>{newTime[2] +':'+newTime[3] }</Text>
+        </Component>
     );
   };
 
   render() {
     return (
-      <View style={this.props.style}>
-        {this.renderCountDown()}
-      </View>
+        <View style={this.props.style}>
+          {this.renderCountDown()}
+        </View>
     );
   }
 }
