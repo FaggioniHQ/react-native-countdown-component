@@ -4,7 +4,7 @@
   "description": "React Native CountDown Component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/talalmajali/react-native-countdown-component.git"
+    "url": "https://github.com/FaggioniHQ/react-native-countdown-component.git"
   },
   "keywords": [
     "react-native",
@@ -17,14 +17,6 @@
     "counter",
     "countdown"
   ],
-  "author": {
-    "name": "Talal Majali",
-    "email": "t.majali93@gmail.com"
-  },
-  "homepage": "https://github.com/talalmajali/react-native-countdown-component",
-  "bugs": {
-    "url": "https://github.com/talalmajali/react-native-countdown-component/issues"
-  },
   "dependencies": {
     "lodash": "^4.17.3",
     "sprintf-js": "^1.1.1",
